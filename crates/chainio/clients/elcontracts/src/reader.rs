@@ -2036,7 +2036,7 @@ mod tests {
             .get_allocated_stake(operator_set, operators, strategies)
             .await
             .unwrap();
-        assert_eq!(slashable_stake[0][0], "0".parse().unwrap());
+        assert_eq!(slashable_stake[0][0], "0".parse::<U256>().unwrap());
     }
 
     #[tokio::test]
