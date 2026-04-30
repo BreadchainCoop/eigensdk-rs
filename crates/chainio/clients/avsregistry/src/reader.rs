@@ -1442,7 +1442,7 @@ mod tests {
             .weight_of_operator_for_quorum(quorum_number, operator_address)
             .await
             .unwrap();
-        assert_eq!(weight, "10000000000000000000".parse().unwrap());
+        assert_eq!(weight, "10000000000000000000".parse::<U96>().unwrap());
     }
 
     #[tokio::test]
@@ -1454,7 +1454,7 @@ mod tests {
             .strategy_params_length(quorum_number)
             .await
             .unwrap();
-        assert_eq!(len, "1".parse().unwrap());
+        assert_eq!(len, "1".parse::<U256>().unwrap());
     }
 
     #[tokio::test]
@@ -1499,13 +1499,13 @@ mod tests {
             .get_stake_update_at_index(quorum_number, operator_id, index)
             .await
             .unwrap();
-        assert_eq!(stake_update.stake, "10000000000000000000".parse().unwrap());
+        assert_eq!(stake_update.stake, "10000000000000000000".parse::<U96>().unwrap());
 
         let stake_update = avs_reader
             .get_latest_stake_update(operator_id, quorum_number)
             .await
             .unwrap();
-        assert_eq!(stake_update.stake, "10000000000000000000".parse().unwrap());
+        assert_eq!(stake_update.stake, "10000000000000000000".parse::<U96>().unwrap());
 
         let stake_update_vec = avs_reader
             .get_stake_history(operator_id, quorum_number)
@@ -1513,14 +1513,14 @@ mod tests {
             .unwrap();
         assert_eq!(
             stake_update_vec.first().unwrap().stake,
-            "10000000000000000000".parse().unwrap()
+            "10000000000000000000".parse::<U96>().unwrap()
         );
 
         let len = avs_reader
             .get_stake_history_length(operator_id, quorum_number)
             .await
             .unwrap();
-        assert_eq!(len, "1".parse().unwrap());
+        assert_eq!(len, "1".parse::<U256>().unwrap());
 
         let stake_update_history_vec = avs_reader
             .get_stake_history(operator_id, quorum_number)
@@ -1529,7 +1529,7 @@ mod tests {
 
         assert_eq!(
             stake_update_history_vec.first().unwrap().stake,
-            "10000000000000000000".parse().unwrap()
+            "10000000000000000000".parse::<U96>().unwrap()
         );
 
         let latest_stake_update = avs_reader
@@ -1538,14 +1538,14 @@ mod tests {
             .unwrap();
         assert_eq!(
             latest_stake_update.stake,
-            "10000000000000000000".parse().unwrap()
+            "10000000000000000000".parse::<U96>().unwrap()
         );
 
         let stake_update = avs_reader
             .get_stake_update_at_index(quorum_number, operator_id, index)
             .await
             .unwrap();
-        assert_eq!(stake_update.stake, "10000000000000000000".parse().unwrap());
+        assert_eq!(stake_update.stake, "10000000000000000000".parse::<U96>().unwrap());
         let block_number = get_provider(&http_endpoint)
             .get_block_number()
             .await
@@ -1583,7 +1583,7 @@ mod tests {
             .get_total_stake_history_length(quorum_number)
             .await
             .unwrap();
-        assert_eq!(total_stake_history_length, "2".parse().unwrap());
+        assert_eq!(total_stake_history_length, "2".parse::<U256>().unwrap());
 
         let current_total_stake = avs_reader
             .get_current_total_stake(quorum_number)
